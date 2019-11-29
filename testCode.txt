@@ -1,0 +1,69 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        private static List<int> getMeetingPlaces()
+        {
+            List<String> firstString = new List<String>();
+
+            List<String> secondString = new List<String>();
+
+            List<int> meetingPlaces = new List<int>();
+
+            Console.Write("Type first string array, \npress Enter after every word. \nTo end typing array press Enter: \n");
+
+            do
+            {
+
+                firstString.Add(Console.ReadLine());
+                meetingPlaces.Add(0);
+
+            } while (firstString.Last().Length != 0);
+
+            //в конце этого цикла, из-за ввода пустой строки, будет путой элемент
+            //чтобы не было этого лишнего элемента в "массиве совпадений",
+            //удаляется этот последний элемент
+
+            firstString.RemoveAt(firstString.Count - 1);
+            meetingPlaces.RemoveAt(firstString.Count - 1);
+
+            Console.WriteLine("Type second string array,\npress Enter after every word.\nTo end typing array press Enter: ");
+
+            int arrayLengthCounter = 0;
+
+            do
+            {
+                secondString.Add(Console.ReadLine());
+
+
+                for (int i =0;i< firstString.Count;i++)
+                {
+                    if (firstString[i] == secondString.Last())
+                        meetingPlaces[i] = 1;
+                }
+
+            } while (arrayLengthCounter != firstString.Count-1 && secondString.Last().Length != 0);
+
+
+            return meetingPlaces;
+        }
+        static void Main(string[] args)
+        {
+            List<int> array = getMeetingPlaces();
+
+            Console.WriteLine("Your resoult: ");
+
+            foreach(int element in array)
+            {
+                Console.Write(element + " ");
+            }
+            Console.ReadLine();
+        }
+    }
+}
